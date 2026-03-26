@@ -1,0 +1,6 @@
+[submodule "lpac"]
+	path = lpac
+	url = https://github.com/estkme-group/lpac.git
+[submodule "pysim"]
+	path = pysim
+	url = https://github.com/osmocom/pysim.git
