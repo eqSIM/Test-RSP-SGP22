@@ -1,5 +1,8 @@
 pysim/.venv/
+.venv-bench/
 lpac/build/
+nginx/nginx-source/
+nginx/pq_build/
 pqc_benchmark_data/
 *.pyc
 __pycache__/

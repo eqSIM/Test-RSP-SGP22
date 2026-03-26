@@ -1,0 +1,13 @@
+# Append inside `http { }` of nginx.conf after building nginx against OpenSSL + oqs-provider.
+# server {
+#     listen 8444 ssl;
+#     server_name testsmdpplus1.example.com;
+#     ssl_certificate     /path/to/pq_dptls.pem;
+#     ssl_certificate_key /path/to/pq_dptls.key;
+#     ssl_protocols TLSv1.3;
+#     location / {
+#         proxy_pass http://smdpp/;
+#         proxy_read_timeout 600s;
+#         proxy_set_header Host $host;
+#     }
+# }
