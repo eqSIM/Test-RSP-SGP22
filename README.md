@@ -4,16 +4,32 @@ Benchmarking suite for the paper *"Evaluating Post-Quantum Cryptography for Cons
 
 ---
 
+## Cloning
+
+`lpac` and `pysim` are git submodules. Always clone with `--recurse-submodules`:
+
+```bash
+git clone --recurse-submodules https://github.com/Lavelliane/Test-RSP-SGP22.git
+```
+
+If you already cloned without the flag, initialise the submodules afterwards:
+
+```bash
+git submodule update --init
+```
+
+---
+
 ## Repository layout
 
 ```
 benchmark/          # All measurement scripts
 scripts/            # Build helpers (nginx, liboqs, certs)
 nginx/              # nginx config + PQ TLS cert output
-pysim/              # osmo-smdpp SM-DP+ server (osmocom fork, as git subtree)
-lpac/               # lpac local profile agent (as git subtree)
-pqc_benchmark_data/ # Output data (gitignored; created by scripts)
-plan-2.md           # Experiment completion plan
+pysim/              # osmo-smdpp SM-DP+ server (git submodule → osmocom/pysim)
+lpac/               # lpac local profile agent  (git submodule → estkme-group/lpac)
+pqc_benchmark_data/ # Output data (gitignored; created at runtime)
+methods/plan-2.md   # Experiment completion plan
 ```
 
 ---
