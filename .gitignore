@@ -6,3 +6,4 @@ nginx/pq_build/
 pqc_benchmark_data/
 *.pyc
 __pycache__/
+*.tex
