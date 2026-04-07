@@ -1,0 +1,49 @@
+iteration 126 2026-04-07T06:14:54.027527+00:00
+$ /home/jhubuntu/pq-rsp-benchmarks/lpac/build/src/lpac profile download -s testsmdpplus1.example.com:8443 -m TS48v1_A
+--- stdout ---
+{"type":"progress","payload":{"code":0,"message":"es10b_get_euicc_challenge_and_info","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_initiate_authentication","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es10b_authenticate_server","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_authenticate_client","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es8p_metadata_parse","data":{"iccid":"89000123456789012341","serviceProviderName":"OsmocomSPN","profileName":"TS48v1_A","iconType":null,"icon":null,"profileClass":"operational"}}}
+{"type":"progress","payload":{"code":0,"message":"es10b_prepare_download","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_get_bound_profile_package","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es10b_load_bound_profile_package","data":"testsmdpplus1.example.com:8443"}}
+{"type":"lpa","payload":{"code":0,"message":"success","data":{"seqNumber":1211,"iccid":"89000123456789012341","bppCommandId":"unknown","errorReason":"unknown"}}}
+--- stderr ---
+BENCH|BF2E|GetEuiccChallenge|5799|0
+BENCH|BF20|GetEuiccInfo1|41477|0
+BENCH|ES9P|/gsma/rsp2/es9plus/initiateAuthentication|15022|0
+BENCH|BF38|AuthenticateServer|3113927|0
+BENCH|ES9P|/gsma/rsp2/es9plus/authenticateClient|36936|0
+BENCH|BF21|PrepareDownload|3749531|0
+BENCH|ES9P|/gsma/rsp2/es9plus/getBoundProfilePackage|25091|0
+BENCH|BF36|LoadBPP_seg0|1450110|0
+BENCH|BF36|LoadBPP_seg1|60765|0
+BENCH|BF36|LoadBPP_seg2|1786|0
+BENCH|BF36|LoadBPP_seg3|93508|0
+BENCH|BF36|LoadBPP_seg4|43850|0
+BENCH|BF36|LoadBPP_seg5|2087|0
+BENCH|BF36|LoadBPP_seg6|600530|0
+BENCH|BF36|LoadBPP_seg7|802223|0
+BENCH|BF36|LoadBPP_seg8|1715778|0
+BENCH|BF36|LoadBPP_seg9|881777|0
+BENCH|BF36|LoadBPP_seg10|635430|0
+BENCH|BF36|LoadBPP_seg11|1595253|0
+BENCH|BF36|LoadBPP_seg12|815745|0
+BENCH|BF36|LoadBPP_seg13|889669|0
+BENCH|BF36|LoadBPP_seg14|1794553|0
+BENCH|BF36|LoadBPP_seg15|1007369|0
+BENCH|BF36|LoadBPP_seg16|940204|0
+BENCH|BF36|LoadBPP_seg17|3793319|0
+--- exit 0 ---
+$ /home/jhubuntu/pq-rsp-benchmarks/lpac/build/src/lpac profile disable 89000123456789012341
+--- stdout ---
+{"type":"lpa","payload":{"code":-1,"message":"es10c_disable_profile","data":"profile not in enabled state"}}
+--- stderr ---
+--- exit 255 ---
+$ /home/jhubuntu/pq-rsp-benchmarks/lpac/build/src/lpac profile delete 89000123456789012341
+--- stdout ---
+{"type":"lpa","payload":{"code":0,"message":"success","data":null}}
+--- stderr ---
+--- exit 0 ---

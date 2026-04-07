@@ -1,0 +1,386 @@
+diff --git a/lpac/euicc/es10b.c b/lpac/euicc/es10b.c
+index 370b3de..0c46bc5 100644
+--- a/lpac/euicc/es10b.c
++++ b/lpac/euicc/es10b.c
+@@ -1,5 +1,6 @@
+ #include "es10b.h"
+ #include "euicc.private.h"
++#include "bench.h"
+ 
+ #include "base64.h"
+ #include "derutil.h"
+@@ -124,8 +125,15 @@ int es10b_prepare_download_r(struct euicc_ctx *ctx, char **b64_PrepareDownloadRe
+     free(smdpCertificate);
+     smdpCertificate = NULL;
+ 
+-    if (es10x_command(ctx, &respbuf, &resplen, reqbuf, reqlen) < 0) {
+-        goto err;
++    {
++        int _rv;
++        LPAC_BENCH_WRAP_START;
++        LPAC_BENCH_WRAP_BEGIN;
++        _rv = es10x_command(ctx, &respbuf, &resplen, reqbuf, reqlen);
++        LPAC_BENCH_WRAP_END("BF21", "PrepareDownload", _rv);
++        if (_rv < 0) {
++            goto err;
++        }
+     }
+ 
+     free(reqbuf);
+diff --git a/v-euicc/CMakeLists.txt b/v-euicc/CMakeLists.txt
+index 545cc6d..0dc5605 100644
+--- a/v-euicc/CMakeLists.txt
++++ b/v-euicc/CMakeLists.txt
+@@ -31,7 +31,10 @@ add_executable(v-euicc-daemon
+ # Find OpenSSL for ECDSA signing
+ find_package(OpenSSL REQUIRED)
+ 
+-target_link_libraries(v-euicc-daemon PRIVATE cjson euicc OpenSSL::Crypto)
++list(APPEND CMAKE_PREFIX_PATH "$ENV{HOME}/.local")
++find_package(liboqs CONFIG REQUIRED)
++
++target_link_libraries(v-euicc-daemon PRIVATE cjson euicc OpenSSL::Crypto OQS::oqs)
+ 
+ if(WIN32)
+     target_link_libraries(v-euicc-daemon PRIVATE ws2_32)
+diff --git a/v-euicc/include/crypto.h b/v-euicc/include/crypto.h
+index 9681b5c..2b7490e 100644
+--- a/v-euicc/include/crypto.h
++++ b/v-euicc/include/crypto.h
+@@ -35,6 +35,10 @@ int derive_session_keys_ecka(const uint8_t *euicc_otsk, uint32_t euicc_otsk_len,
+                               const uint8_t *smdp_otpk, uint32_t smdp_otpk_len,
+                               uint8_t *session_key_enc, uint8_t *session_key_mac);
+ 
++/* Annex G KDF from a 32-byte shared secret (ECDH Z or ML-KEM SS) */
++int derive_session_keys_from_shared_secret(const uint8_t *shared_secret, uint32_t secret_len,
++                                           uint8_t *session_key_enc, uint8_t *session_key_mac);
++
+ 
+ 
+ 
+diff --git a/v-euicc/include/euicc_state.h b/v-euicc/include/euicc_state.h
+index 62aeada..6a64f95 100644
+--- a/v-euicc/include/euicc_state.h
++++ b/v-euicc/include/euicc_state.h
+@@ -57,8 +57,10 @@ struct euicc_state {
+     uint32_t euicc_otpk_len;
+     uint8_t *euicc_otsk;             // otSK.EUICC.ECKA (one-time private key, 32 bytes)
+     uint32_t euicc_otsk_len;
+-    uint8_t *smdp_otpk;              // otPK.DP.ECKA from SM-DP+ (65 bytes uncompressed)
++    uint8_t *smdp_otpk;              // otPK.DP.ECKA from SM-DP+ (65 bytes) or ML-KEM ciphertext (1088 bytes)
+     uint32_t smdp_otpk_len;
++
++    int otsk_is_mlkem;               // 1: otSK is ML-KEM-768 secret key; 0: ECDH P-256 scalar
+     
+     // Derived session keys (from ECKA key agreement, Annex G of SGP.22)
+     uint8_t session_key_enc[16];     // KEK for profile encryption (AES-128)
+diff --git a/v-euicc/src/apdu_handler.c b/v-euicc/src/apdu_handler.c
+index a7778a0..af0abb7 100644
+--- a/v-euicc/src/apdu_handler.c
++++ b/v-euicc/src/apdu_handler.c
+@@ -2,6 +2,8 @@
+ #include "cert_loader.h"
+ #include "crypto.h"
+ #include <euicc/hexutil.h>
++#include <oqs/kem_ml_kem.h>
++#include <oqs/oqs.h>
+ #include <openssl/evp.h>
+ #include <stdbool.h>
+ #include <stdio.h>
+@@ -13,6 +15,29 @@
+ // Forward declaration
+ static void build_tlv(uint8_t **buffer, uint32_t *buffer_len, uint16_t tag, const uint8_t *value, uint32_t value_len);
+ 
++/** BER/DER length after tag (short or long form). Returns 0 on success. */
++static int read_ber_len(const uint8_t *p, uint32_t rem, uint32_t *out_len, uint32_t *consumed) {
++    if (rem < 1) {
++        return -1;
++    }
++    if (p[0] < 0x80) {
++        *out_len = p[0];
++        *consumed = 1;
++        return 0;
++    }
++    uint8_t n = (uint8_t)(p[0] & 0x7f);
++    if (n == 0 || n > 4 || rem < 1 + n) {
++        return -1;
++    }
++    uint32_t v = 0;
++    for (uint8_t i = 0; i < n; i++) {
++        v = (v << 8) | p[1 + i];
++    }
++    *out_len = v;
++    *consumed = 1 + n;
++    return 0;
++}
++
+ // Helper: Build complete euiccInfo2 structure (reusable)
+ static int build_euiccinfo2(uint8_t **output_buf, uint32_t *output_len) {
+     // Build EUICCInfo2 with proper ASN.1 encoding
+@@ -978,8 +1003,8 @@ static int process_es10x_command(struct euicc_state *state, uint8_t **response,
+         }
+ 
+         // Phase A: Skip signature verification, just build response
+-        // Build euiccSigned2 (SEQUENCE tag 0x30)
+-        uint8_t euicc_signed2_buf[256];
++        // Build euiccSigned2 (SEQUENCE tag 0x30) — large buffer for ML-KEM-768 public key in 5F49
++        uint8_t euicc_signed2_buf[4096];
+         uint8_t *signed2_ptr = euicc_signed2_buf;
+         uint32_t signed2_len = 0;
+         
+@@ -994,31 +1019,31 @@ static int process_es10x_command(struct euicc_state *state, uint8_t **response,
+             free(tid_tlv);
+         }
+         
+-        // Add euiccOtpk (tag 0x5F49 = APPLICATION 73)
+-        // Generate a real EC key pair and use the public key
+-        // SGP.22 Section 3.1.3.2: eUICC generates or reuses otPK.EUICC.ECKA key pair
+-        EVP_PKEY *otpk_keypair = generate_ec_keypair();
+-        uint8_t *euicc_otpk = NULL;
+-        uint32_t euicc_otpk_len = 0;
+-
+-        if (otpk_keypair) {
+-            euicc_otpk = extract_ec_public_key_uncompressed(otpk_keypair, &euicc_otpk_len);
+-            if (!euicc_otpk || euicc_otpk_len != 65) {
+-                fprintf(stderr, "[v-euicc] Failed to extract euiccOtpk public key\n");
+-                if (euicc_otpk) free(euicc_otpk);
+-                EVP_PKEY_free(otpk_keypair);
+-                return -1;
+-            } else {
+-                fprintf(stderr, "[v-euicc] Generated valid euiccOtpk: ");
+-                for (uint32_t i = 0; i < euicc_otpk_len && i < 8; i++) {
+-                    fprintf(stderr, "%02x ", euicc_otpk[i]);
+-                }
+-                fprintf(stderr, "...\n");
+-            }
+-        } else {
+-            fprintf(stderr, "[v-euicc] Failed to generate euiccOtpk keypair\n");
++        // Add euiccOtpk (tag 0x5F49) — Experiment 5: ML-KEM-768 instead of ECDH P-256
++        OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);
++        if (!kem) {
++            fprintf(stderr, "[v-euicc] OQS_KEM_new(ML-KEM-768) failed\n");
++            return -1;
++        }
++        uint8_t *euicc_otpk = malloc(kem->length_public_key);
++        uint8_t *euicc_otsk = malloc(kem->length_secret_key);
++        if (!euicc_otpk || !euicc_otsk) {
++            OQS_KEM_free(kem);
++            free(euicc_otpk);
++            free(euicc_otsk);
+             return -1;
+         }
++        if (OQS_KEM_keypair(kem, euicc_otpk, euicc_otsk) != OQS_SUCCESS) {
++            fprintf(stderr, "[v-euicc] OQS_KEM_keypair failed\n");
++            OQS_KEM_free(kem);
++            free(euicc_otpk);
++            free(euicc_otsk);
++            return -1;
++        }
++        OQS_KEM_free(kem);
++        const uint32_t euicc_otpk_len = OQS_KEM_ml_kem_768_length_public_key;
++
++        fprintf(stderr, "[v-euicc] Generated ML-KEM-768 euiccOtpk (%u bytes)\n", euicc_otpk_len);
+ 
+         uint8_t *otpk_tlv = NULL;
+         uint32_t otpk_tlv_len = 0;
+@@ -1030,26 +1055,17 @@ static int process_es10x_command(struct euicc_state *state, uint8_t **response,
+             free(otpk_tlv);
+         }
+ 
+-        // Store the ephemeral key pair in state for session key derivation (SGP.22 Section 3.1.3.3)
+-        // This is required for InitialiseSecureChannel to derive session keys
+         free(state->euicc_otpk);
+-        state->euicc_otpk = euicc_otpk;  // Transfer ownership
++        state->euicc_otpk = euicc_otpk;
+         state->euicc_otpk_len = euicc_otpk_len;
+-        
+-        // Extract and store the private key for ECKA
+         free(state->euicc_otsk);
+-        state->euicc_otsk = extract_ec_private_key(otpk_keypair, &state->euicc_otsk_len);
+-        if (!state->euicc_otsk || state->euicc_otsk_len != 32) {
+-            fprintf(stderr, "[v-euicc] Failed to extract euiccOtsk private key\n");
+-            EVP_PKEY_free(otpk_keypair);
+-            return -1;
+-        }
+-        
+-        fprintf(stderr, "[v-euicc] Stored otPK.EUICC.ECKA (%u bytes) and otSK.EUICC.ECKA (%u bytes)\n",
++        state->euicc_otsk = euicc_otsk;
++        state->euicc_otsk_len = OQS_KEM_ml_kem_768_length_secret_key;
++        state->otsk_is_mlkem = 1;
++
++        fprintf(stderr, "[v-euicc] Stored otPK.EUICC.MLKEM (%u bytes) and secret key (%u bytes)\n",
+                 state->euicc_otpk_len, state->euicc_otsk_len);
+         
+-        EVP_PKEY_free(otpk_keypair);
+-        
+         // Wrap in SEQUENCE (tag 0x30)
+         uint8_t *euicc_signed2_tlv = NULL;
+         uint32_t euicc_signed2_tlv_len = 0;
+@@ -1103,7 +1119,7 @@ static int process_es10x_command(struct euicc_state *state, uint8_t **response,
+         free(smdp_signature2_do);
+         
+         // Build PrepareDownloadResponse: BF21 { A0 { euiccSigned2, euiccSignature2 } }
+-        uint8_t prep_resp_buf[512];
++        uint8_t prep_resp_buf[8192];
+         uint8_t *prep_ptr = prep_resp_buf;
+         uint32_t prep_len = 0;
+         
+@@ -1534,19 +1550,22 @@ static int process_es10x_command(struct euicc_state *state, uint8_t **response,
+             }
+         }
+         
+-        // Look for smdpOtpk tag 0x5F49
++        // Look for smdpOtpk tag 0x5F49 (short or long length)
+         while (remaining > 3) {
+             if (ptr[0] == 0x5F && ptr[1] == 0x49) {
+-                uint8_t len = ptr[2];
+-                if (len < 0x80 && remaining >= 3 + len) {
+-                    smdp_otpk_len = len;
+-                    smdp_otpk_data = malloc(smdp_otpk_len);
+-                    if (smdp_otpk_data) {
+-                        memcpy(smdp_otpk_data, ptr + 3, smdp_otpk_len);
+-                        fprintf(stderr, "[v-euicc] BF23: Extracted smdpOtpk (%u bytes)\n", smdp_otpk_len);
++                uint32_t L = 0, lc = 0;
++                if (read_ber_len(ptr + 2, remaining - 2, &L, &lc) == 0) {
++                    uint32_t hdr = 2 + lc;
++                    if (remaining >= hdr + L) {
++                        smdp_otpk_len = L;
++                        smdp_otpk_data = malloc(smdp_otpk_len);
++                        if (smdp_otpk_data) {
++                            memcpy(smdp_otpk_data, ptr + hdr, smdp_otpk_len);
++                            fprintf(stderr, "[v-euicc] BF23: Extracted smdpOtpk (%u bytes)\n", smdp_otpk_len);
++                        }
+                     }
+-                    break;
+                 }
++                break;
+             }
+             // Skip current TLV
+             uint8_t skip_len = ptr[1];
+@@ -1558,29 +1577,54 @@ static int process_es10x_command(struct euicc_state *state, uint8_t **response,
+                 remaining -= 2 + skip_len;
+             }
+         }
+-        
+-        if (!smdp_otpk_data || smdp_otpk_len != 65) {
+-            fprintf(stderr, "[v-euicc] BF23: Failed to extract smdpOtpk or invalid length\n");
+-            free(smdp_otpk_data);
++
++        if (!smdp_otpk_data) {
++            fprintf(stderr, "[v-euicc] BF23: Failed to extract smdpOtpk\n");
+             return -1;
+         }
+-        
+-        // Store SM-DP+ public key for later use
++
++        /* Store SM-DP+ otPK (ECDH) or ML-KEM ciphertext */
+         free(state->smdp_otpk);
+         state->smdp_otpk = smdp_otpk_data;
+         state->smdp_otpk_len = smdp_otpk_len;
+-        
+-        // Derive session keys using ECKA (SGP.22 Annex G)
+-        if (!state->euicc_otsk || state->euicc_otsk_len != 32) {
+-            fprintf(stderr, "[v-euicc] BF23: eUICC ephemeral private key not available\n");
+-            return -1;
+-        }
+-        
+-        if (derive_session_keys_ecka(state->euicc_otsk, state->euicc_otsk_len,
+-                                     state->smdp_otpk, state->smdp_otpk_len,
+-                                     state->session_key_enc, state->session_key_mac) < 0) {
+-            fprintf(stderr, "[v-euicc] BF23: Session key derivation failed\n");
+-            return -1;
++
++        if (state->otsk_is_mlkem) {
++            if (smdp_otpk_len != OQS_KEM_ml_kem_768_length_ciphertext) {
++                fprintf(stderr, "[v-euicc] BF23: expected ML-KEM ciphertext %u bytes, got %u\n",
++                        OQS_KEM_ml_kem_768_length_ciphertext, smdp_otpk_len);
++                return -1;
++            }
++            if (!state->euicc_otsk || state->euicc_otsk_len != OQS_KEM_ml_kem_768_length_secret_key) {
++                fprintf(stderr, "[v-euicc] BF23: ML-KEM secret key not available\n");
++                return -1;
++            }
++            uint8_t shared_secret[32];
++            if (OQS_KEM_ml_kem_768_decaps(shared_secret, state->smdp_otpk, state->euicc_otsk) != OQS_SUCCESS) {
++                fprintf(stderr, "[v-euicc] BF23: OQS_KEM_ml_kem_768_decaps failed\n");
++                memset(shared_secret, 0, sizeof(shared_secret));
++                return -1;
++            }
++            if (derive_session_keys_from_shared_secret(shared_secret, sizeof(shared_secret), state->session_key_enc,
++                                                       state->session_key_mac) < 0) {
++                memset(shared_secret, 0, sizeof(shared_secret));
++                return -1;
++            }
++            memset(shared_secret, 0, sizeof(shared_secret));
++        } else {
++            if (smdp_otpk_len != 65) {
++                fprintf(stderr, "[v-euicc] BF23: expected ECDH smdpOtpk 65 bytes, got %u\n", smdp_otpk_len);
++                return -1;
++            }
++            if (!state->euicc_otsk || state->euicc_otsk_len != 32) {
++                fprintf(stderr, "[v-euicc] BF23: eUICC ephemeral private key not available\n");
++                return -1;
++            }
++
++            if (derive_session_keys_ecka(state->euicc_otsk, state->euicc_otsk_len, state->smdp_otpk,
++                                         state->smdp_otpk_len, state->session_key_enc, state->session_key_mac) < 0) {
++                fprintf(stderr, "[v-euicc] BF23: Session key derivation failed\n");
++                return -1;
++            }
+         }
+         
+         state->session_keys_derived = 1;
+diff --git a/v-euicc/src/crypto.c b/v-euicc/src/crypto.c
+index 81df8c3..a95bbb7 100644
+--- a/v-euicc/src/crypto.c
++++ b/v-euicc/src/crypto.c
+@@ -377,3 +377,29 @@ int derive_session_keys_ecka(const uint8_t *euicc_otsk, uint32_t euicc_otsk_len,
+     return 0;
+ }
+ 
++int derive_session_keys_from_shared_secret(const uint8_t *shared_secret, uint32_t secret_len,
++                                           uint8_t *session_key_enc, uint8_t *session_key_mac) {
++    if (!shared_secret || secret_len != 32 || !session_key_enc || !session_key_mac) {
++        fprintf(stderr, "[crypto] derive_session_keys_from_shared_secret: invalid args\n");
++        return -1;
++    }
++    uint8_t kdf_input[36];
++    memcpy(kdf_input, shared_secret, 32);
++    kdf_input[32] = 0x00;
++    kdf_input[33] = 0x00;
++    kdf_input[34] = 0x00;
++    kdf_input[35] = 0x01;
++    uint8_t kek_hash[32];
++    SHA256(kdf_input, 36, kek_hash);
++    memcpy(session_key_enc, kek_hash, 16);
++    kdf_input[35] = 0x02;
++    uint8_t km_hash[32];
++    SHA256(kdf_input, 36, km_hash);
++    memcpy(session_key_mac, km_hash, 16);
++    memset(kdf_input, 0, sizeof(kdf_input));
++    memset(kek_hash, 0, sizeof(kek_hash));
++    memset(km_hash, 0, sizeof(km_hash));
++    fprintf(stderr, "[crypto] Session keys derived from shared secret (KEK + KM)\n");
++    return 0;
++}
++
+diff --git a/v-euicc/src/euicc_state.c b/v-euicc/src/euicc_state.c
+index 7070203..437e7f1 100644
+--- a/v-euicc/src/euicc_state.c
++++ b/v-euicc/src/euicc_state.c
+@@ -44,6 +44,7 @@ void euicc_state_init(struct euicc_state *state) {
+     state->euicc_otsk_len = 0;
+     state->smdp_otpk = NULL;
+     state->smdp_otpk_len = 0;
++    state->otsk_is_mlkem = 0;
+     memset(state->session_key_enc, 0, sizeof(state->session_key_enc));
+     memset(state->session_key_mac, 0, sizeof(state->session_key_mac));
+     state->session_keys_derived = 0;
+@@ -101,6 +102,7 @@ void euicc_state_reset(struct euicc_state *state) {
+     state->euicc_otsk_len = 0;
+     state->smdp_otpk = NULL;
+     state->smdp_otpk_len = 0;
++    state->otsk_is_mlkem = 0;
+     memset(state->session_key_enc, 0, sizeof(state->session_key_enc));
+     memset(state->session_key_mac, 0, sizeof(state->session_key_mac));
+     state->session_keys_derived = 0;

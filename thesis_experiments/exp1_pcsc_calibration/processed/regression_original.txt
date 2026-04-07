@@ -1,0 +1,6 @@
+Linear regression — original calibration sizes (0, 32, 64, 128, 255 bytes)
+
+Model: T_PCSC(n) = a + b*n
+Intercept a: 1073.7516 µs  (95% CI: 959.3582 to 1188.1451)
+Slope b:     62.295119 µs/byte  (95% CI: 61.425547 to 63.164690)
+R-squared:   0.999942

@@ -1,0 +1,26 @@
+iteration 177 2026-04-07T06:37:12.517446+00:00
+$ /home/jhubuntu/pq-rsp-benchmarks/lpac/build/src/lpac profile download -s testsmdpplus1.example.com:8443 -m TS48v1_A
+--- stdout ---
+{"type":"progress","payload":{"code":0,"message":"es10b_get_euicc_challenge_and_info","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_initiate_authentication","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es10b_authenticate_server","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_authenticate_client","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es8p_metadata_parse","data":{"iccid":"89000123456789012341","serviceProviderName":"OsmocomSPN","profileName":"TS48v1_A","iconType":null,"icon":null,"profileClass":"operational"}}}
+{"type":"progress","payload":{"code":0,"message":"es10b_prepare_download","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_get_bound_profile_package","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es10b_cancel_session","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_cancel_session","data":"testsmdpplus1.example.com:8443"}}
+{"type":"lpa","payload":{"code":-1,"message":"es9p_get_bound_profile_package","data":"HTTP transport failed"}}
+--- stderr ---
+BENCH|BF2E|GetEuiccChallenge|5978|0
+BENCH|BF20|GetEuiccInfo1|41488|0
+BENCH|ES9P|/gsma/rsp2/es9plus/initiateAuthentication|11134|0
+BENCH|BF38|AuthenticateServer|3112855|0
+BENCH|ES9P|/gsma/rsp2/es9plus/authenticateClient|30946|0
+BENCH|BF21|PrepareDownload|3767733|0
+curl_easy_perform() failed: Couldn't connect to server
+BENCH|ES9P|/gsma/rsp2/es9plus/getBoundProfilePackage|916|-1
+BENCH|BF41|CancelSession|1772327|0
+curl_easy_perform() failed: Couldn't connect to server
+BENCH|ES9P|/gsma/rsp2/es9plus/cancelSession|688|-1
+--- exit 255 ---

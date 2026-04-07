@@ -1,0 +1,4 @@
+Experiment 5 — Baseline BF21 PrepareDownload RTT (config a, ECDH P-256)
+Note: BF21 RTT includes host↔v-euicc APDU handling and other work besides keygen.
+median_prepare_download_us: 493722.5
+mean_prepare_download_us: 492455.9

@@ -1,0 +1,14 @@
+iteration 2 2026-01-01T00:01:00+00:00
+--- stdout ---
+{"type":"lpa","payload":{"code":0,"message":"success","data":{"seqNumber":2,"iccid":"89970404200003205555","bppCommandId":"firstProfile","errorReason":"none"}}}
+--- stderr ---
+BENCH|BF2E|GetEuiccChallenge|51000|0
+BENCH|BF20|GetEuiccInfo1|49000|0
+BENCH|ES9P|/gsma/rsp2/es9plus/initiateAuthentication|101000|0
+BENCH|BF38|AuthenticateServer|3100000|0
+BENCH|ES9P|/gsma/rsp2/es9plus/authenticateClient|121000|0
+BENCH|BF21|PrepareDownload|4100000|0
+BENCH|ES9P|/gsma/rsp2/es9plus/getBoundProfilePackage|910000|0
+BENCH|BF36|LoadBPP_seg0|805000|0
+BENCH|BF36|LoadBPP_seg1|815000|0
+--- exit 0 ---

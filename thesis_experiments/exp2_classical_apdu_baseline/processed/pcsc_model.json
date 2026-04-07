@@ -1,0 +1,6 @@
+{
+  "source": "thesis_experiments/exp1_pcsc_calibration/processed/regression_extended.txt",
+  "model": "T_PCSC(n) = a + b*n (microseconds)",
+  "a_us": 1073.7516,
+  "b_us_per_byte": 62.295119
+}

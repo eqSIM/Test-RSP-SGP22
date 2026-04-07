@@ -1,0 +1,13 @@
+{
+  "_comment": "Lc bytes per BENCH row for T_PCSC subtraction. null = no subtraction (net stays raw). BF36: _default_per_segment applies to LoadBPP_seg0, LoadBPP_seg1, ...",
+  "BF2E": { "GetEuiccChallenge": null },
+  "BF20": { "GetEuiccInfo1": null },
+  "BF38": { "AuthenticateServer": null },
+  "BF21": { "PrepareDownload": null },
+  "BF36": { "_default_per_segment": null },
+  "ES9P": {
+    "/gsma/rsp2/es9plus/initiateAuthentication": null,
+    "/gsma/rsp2/es9plus/authenticateClient": null,
+    "/gsma/rsp2/es9plus/getBoundProfilePackage": null
+  }
+}

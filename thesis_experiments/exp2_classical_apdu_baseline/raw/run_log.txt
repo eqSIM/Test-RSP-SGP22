@@ -1,0 +1,631 @@
+
+=== exp2 run_sessions start 2026-04-07T03:49:41.782811+00:00 iterations=200 ===
+iter 1 FAIL rc=255 iccid=None
+iter 2 FAIL rc=255 iccid=None
+iter 3 FAIL rc=255 iccid=None
+iter 4 FAIL rc=255 iccid=None
+iter 5 FAIL rc=255 iccid=None
+iter 6 FAIL rc=255 iccid=None
+iter 7 FAIL rc=255 iccid=None
+iter 8 FAIL rc=255 iccid=None
+iter 9 FAIL rc=255 iccid=None
+iter 10 FAIL rc=255 iccid=None
+iter 11 FAIL rc=255 iccid=None
+iter 12 FAIL rc=255 iccid=None
+iter 13 FAIL rc=255 iccid=None
+iter 14 FAIL rc=255 iccid=None
+iter 15 FAIL rc=255 iccid=None
+iter 16 FAIL rc=255 iccid=None
+iter 17 FAIL rc=255 iccid=None
+iter 18 FAIL rc=255 iccid=None
+iter 19 FAIL rc=255 iccid=None
+iter 20 FAIL rc=255 iccid=None
+iter 21 FAIL rc=255 iccid=None
+iter 22 FAIL rc=255 iccid=None
+iter 23 FAIL rc=255 iccid=None
+iter 24 FAIL rc=255 iccid=None
+iter 25 FAIL rc=255 iccid=None
+iter 26 FAIL rc=255 iccid=None
+iter 27 FAIL rc=255 iccid=None
+iter 28 FAIL rc=255 iccid=None
+iter 29 FAIL rc=255 iccid=None
+iter 30 FAIL rc=255 iccid=None
+iter 31 FAIL rc=255 iccid=None
+iter 32 FAIL rc=255 iccid=None
+iter 33 FAIL rc=255 iccid=None
+iter 34 FAIL rc=255 iccid=None
+iter 35 FAIL rc=255 iccid=None
+iter 36 FAIL rc=255 iccid=None
+iter 37 FAIL rc=255 iccid=None
+iter 38 FAIL rc=255 iccid=None
+iter 39 FAIL rc=255 iccid=None
+iter 40 FAIL rc=255 iccid=None
+iter 41 FAIL rc=255 iccid=None
+iter 42 FAIL rc=255 iccid=None
+iter 43 FAIL rc=255 iccid=None
+iter 44 FAIL rc=255 iccid=None
+iter 45 FAIL rc=255 iccid=None
+iter 46 FAIL rc=255 iccid=None
+iter 47 FAIL rc=255 iccid=None
+iter 48 FAIL rc=255 iccid=None
+iter 49 FAIL rc=255 iccid=None
+iter 50 FAIL rc=255 iccid=None
+cooldown 15.0s
+iter 51 FAIL rc=255 iccid=None
+iter 52 FAIL rc=255 iccid=None
+iter 53 FAIL rc=255 iccid=None
+iter 54 FAIL rc=255 iccid=None
+iter 55 FAIL rc=255 iccid=None
+iter 56 FAIL rc=255 iccid=None
+iter 57 FAIL rc=255 iccid=None
+iter 58 FAIL rc=255 iccid=None
+iter 59 FAIL rc=255 iccid=None
+iter 60 FAIL rc=255 iccid=None
+iter 61 FAIL rc=255 iccid=None
+iter 62 FAIL rc=255 iccid=None
+iter 63 FAIL rc=255 iccid=None
+iter 64 FAIL rc=255 iccid=None
+iter 65 FAIL rc=255 iccid=None
+iter 66 FAIL rc=255 iccid=None
+iter 67 FAIL rc=255 iccid=None
+iter 68 FAIL rc=255 iccid=None
+iter 69 FAIL rc=255 iccid=None
+iter 70 FAIL rc=255 iccid=None
+iter 71 FAIL rc=255 iccid=None
+iter 72 FAIL rc=255 iccid=None
+iter 73 FAIL rc=255 iccid=None
+iter 74 FAIL rc=255 iccid=None
+iter 75 FAIL rc=255 iccid=None
+iter 76 FAIL rc=255 iccid=None
+iter 77 FAIL rc=255 iccid=None
+iter 78 FAIL rc=255 iccid=None
+iter 79 FAIL rc=255 iccid=None
+iter 80 FAIL rc=255 iccid=None
+iter 81 FAIL rc=255 iccid=None
+iter 82 FAIL rc=255 iccid=None
+iter 83 FAIL rc=255 iccid=None
+iter 84 FAIL rc=255 iccid=None
+iter 85 FAIL rc=255 iccid=None
+iter 86 FAIL rc=255 iccid=None
+iter 87 FAIL rc=255 iccid=None
+iter 88 FAIL rc=255 iccid=None
+iter 89 FAIL rc=255 iccid=None
+iter 90 FAIL rc=255 iccid=None
+iter 91 FAIL rc=255 iccid=None
+iter 92 FAIL rc=255 iccid=None
+iter 93 FAIL rc=255 iccid=None
+iter 94 FAIL rc=255 iccid=None
+iter 95 FAIL rc=255 iccid=None
+iter 96 FAIL rc=255 iccid=None
+iter 97 FAIL rc=255 iccid=None
+iter 98 FAIL rc=255 iccid=None
+iter 99 FAIL rc=255 iccid=None
+iter 100 FAIL rc=255 iccid=None
+cooldown 15.0s
+iter 101 FAIL rc=255 iccid=None
+iter 102 FAIL rc=255 iccid=None
+iter 103 FAIL rc=255 iccid=None
+iter 104 FAIL rc=255 iccid=None
+iter 105 FAIL rc=255 iccid=None
+iter 106 FAIL rc=255 iccid=None
+iter 107 FAIL rc=255 iccid=None
+iter 108 FAIL rc=255 iccid=None
+iter 109 FAIL rc=255 iccid=None
+iter 110 FAIL rc=255 iccid=None
+iter 111 FAIL rc=255 iccid=None
+iter 112 FAIL rc=255 iccid=None
+iter 113 FAIL rc=255 iccid=None
+iter 114 FAIL rc=255 iccid=None
+iter 115 FAIL rc=255 iccid=None
+iter 116 FAIL rc=255 iccid=None
+iter 117 FAIL rc=255 iccid=None
+iter 118 FAIL rc=255 iccid=None
+iter 119 FAIL rc=255 iccid=None
+iter 120 FAIL rc=255 iccid=None
+iter 121 FAIL rc=255 iccid=None
+iter 122 FAIL rc=255 iccid=None
+iter 123 FAIL rc=255 iccid=None
+iter 124 FAIL rc=255 iccid=None
+iter 125 FAIL rc=255 iccid=None
+iter 126 FAIL rc=255 iccid=None
+iter 127 FAIL rc=255 iccid=None
+iter 128 FAIL rc=255 iccid=None
+iter 129 FAIL rc=255 iccid=None
+iter 130 FAIL rc=255 iccid=None
+iter 131 FAIL rc=255 iccid=None
+iter 132 FAIL rc=255 iccid=None
+iter 133 FAIL rc=255 iccid=None
+iter 134 FAIL rc=255 iccid=None
+iter 135 FAIL rc=255 iccid=None
+iter 136 FAIL rc=255 iccid=None
+iter 137 FAIL rc=255 iccid=None
+iter 138 FAIL rc=255 iccid=None
+iter 139 FAIL rc=255 iccid=None
+iter 140 FAIL rc=255 iccid=None
+iter 141 FAIL rc=255 iccid=None
+iter 142 FAIL rc=255 iccid=None
+iter 143 FAIL rc=255 iccid=None
+iter 144 FAIL rc=255 iccid=None
+iter 145 FAIL rc=255 iccid=None
+iter 146 FAIL rc=255 iccid=None
+iter 147 FAIL rc=255 iccid=None
+iter 148 FAIL rc=255 iccid=None
+iter 149 FAIL rc=255 iccid=None
+iter 150 FAIL rc=255 iccid=None
+cooldown 15.0s
+iter 151 FAIL rc=255 iccid=None
+iter 152 FAIL rc=255 iccid=None
+iter 153 FAIL rc=255 iccid=None
+iter 154 FAIL rc=255 iccid=None
+iter 155 FAIL rc=255 iccid=None
+iter 156 FAIL rc=255 iccid=None
+iter 157 FAIL rc=255 iccid=None
+iter 158 FAIL rc=255 iccid=None
+iter 159 FAIL rc=255 iccid=None
+iter 160 FAIL rc=255 iccid=None
+iter 161 FAIL rc=255 iccid=None
+iter 162 FAIL rc=255 iccid=None
+iter 163 FAIL rc=255 iccid=None
+iter 164 FAIL rc=255 iccid=None
+iter 165 FAIL rc=255 iccid=None
+iter 166 FAIL rc=255 iccid=None
+iter 167 FAIL rc=255 iccid=None
+iter 168 FAIL rc=255 iccid=None
+iter 169 FAIL rc=255 iccid=None
+iter 170 FAIL rc=255 iccid=None
+iter 171 FAIL rc=255 iccid=None
+iter 172 FAIL rc=255 iccid=None
+iter 173 FAIL rc=255 iccid=None
+iter 174 FAIL rc=255 iccid=None
+iter 175 FAIL rc=255 iccid=None
+iter 176 FAIL rc=255 iccid=None
+iter 177 FAIL rc=255 iccid=None
+iter 178 FAIL rc=255 iccid=None
+iter 179 FAIL rc=255 iccid=None
+iter 180 FAIL rc=255 iccid=None
+iter 181 FAIL rc=255 iccid=None
+iter 182 FAIL rc=255 iccid=None
+iter 183 FAIL rc=255 iccid=None
+iter 184 FAIL rc=255 iccid=None
+iter 185 FAIL rc=255 iccid=None
+iter 186 FAIL rc=255 iccid=None
+iter 187 FAIL rc=255 iccid=None
+iter 188 FAIL rc=255 iccid=None
+iter 189 FAIL rc=255 iccid=None
+iter 190 FAIL rc=255 iccid=None
+iter 191 FAIL rc=255 iccid=None
+iter 192 FAIL rc=255 iccid=None
+iter 193 FAIL rc=255 iccid=None
+iter 194 FAIL rc=255 iccid=None
+iter 195 FAIL rc=255 iccid=None
+iter 196 FAIL rc=255 iccid=None
+iter 197 FAIL rc=255 iccid=None
+iter 198 FAIL rc=255 iccid=None
+iter 199 FAIL rc=255 iccid=None
+iter 200 FAIL rc=255 iccid=None
+done failed_iters=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200]
+
+=== exp2 run_sessions start 2026-04-07T05:06:31.989444+00:00 iterations=200 ===
+iter 1 FAIL rc=255 iccid=None
+iter 2 FAIL rc=255 iccid=None
+
+=== exp2 run_sessions start 2026-04-07T05:08:39.721649+00:00 iterations=200 ===
+iter 1 OK iccid=89000123456789012341
+iter 2 OK iccid=89000123456789012341
+iter 3 OK iccid=89000123456789012341
+iter 4 OK iccid=89000123456789012341
+iter 5 OK iccid=89000123456789012341
+iter 6 OK iccid=89000123456789012341
+iter 7 OK iccid=89000123456789012341
+iter 8 OK iccid=89000123456789012341
+iter 9 OK iccid=89000123456789012341
+
+=== exp2 run_sessions start 2026-04-07T05:20:26.381810+00:00 iterations=200 ===
+[iter 1/200] OK iccid=89000123456789012341
+[iter 2/200] OK iccid=89000123456789012341
+[iter 3/200] OK iccid=89000123456789012341
+[iter 4/200] OK iccid=89000123456789012341
+[iter 5/200] OK iccid=89000123456789012341
+[iter 6/200] OK iccid=89000123456789012341
+[iter 7/200] OK iccid=89000123456789012341
+[iter 8/200] OK iccid=89000123456789012341
+[iter 9/200] OK iccid=89000123456789012341
+[iter 10/200] OK iccid=89000123456789012341
+[iter 11/200] OK iccid=89000123456789012341
+[iter 12/200] OK iccid=89000123456789012341
+[iter 13/200] OK iccid=89000123456789012341
+[iter 14/200] OK iccid=89000123456789012341
+[iter 15/200] OK iccid=89000123456789012341
+[iter 16/200] OK iccid=89000123456789012341
+[iter 17/200] OK iccid=89000123456789012341
+[iter 18/200] OK iccid=89000123456789012341
+[iter 19/200] OK iccid=89000123456789012341
+[iter 20/200] OK iccid=89000123456789012341
+[iter 21/200] OK iccid=89000123456789012341
+[iter 22/200] OK iccid=89000123456789012341
+[iter 23/200] OK iccid=89000123456789012341
+[iter 24/200] OK iccid=89000123456789012341
+[iter 25/200] OK iccid=89000123456789012341
+[iter 26/200] OK iccid=89000123456789012341
+[iter 27/200] OK iccid=89000123456789012341
+[iter 28/200] OK iccid=89000123456789012341
+[iter 29/200] OK iccid=89000123456789012341
+[iter 30/200] OK iccid=89000123456789012341
+[iter 31/200] OK iccid=89000123456789012341
+[iter 32/200] OK iccid=89000123456789012341
+[iter 33/200] OK iccid=89000123456789012341
+[iter 34/200] OK iccid=89000123456789012341
+[iter 35/200] OK iccid=89000123456789012341
+[iter 36/200] OK iccid=89000123456789012341
+[iter 37/200] OK iccid=89000123456789012341
+[iter 38/200] OK iccid=89000123456789012341
+[iter 39/200] OK iccid=89000123456789012341
+[iter 40/200] OK iccid=89000123456789012341
+[iter 41/200] OK iccid=89000123456789012341
+[iter 42/200] OK iccid=89000123456789012341
+[iter 43/200] OK iccid=89000123456789012341
+[iter 44/200] OK iccid=89000123456789012341
+[iter 45/200] OK iccid=89000123456789012341
+[iter 46/200] OK iccid=89000123456789012341
+[iter 47/200] OK iccid=89000123456789012341
+[iter 48/200] OK iccid=89000123456789012341
+[iter 49/200] OK iccid=89000123456789012341
+[iter 50/200] OK iccid=89000123456789012341
+cooldown 15.0s after 50 iterations...
+[iter 51/200] OK iccid=89000123456789012341
+[iter 52/200] OK iccid=89000123456789012341
+[iter 53/200] OK iccid=89000123456789012341
+[iter 54/200] OK iccid=89000123456789012341
+[iter 55/200] OK iccid=89000123456789012341
+[iter 56/200] OK iccid=89000123456789012341
+[iter 57/200] OK iccid=89000123456789012341
+[iter 58/200] OK iccid=89000123456789012341
+[iter 59/200] OK iccid=89000123456789012341
+[iter 60/200] OK iccid=89000123456789012341
+[iter 61/200] OK iccid=89000123456789012341
+[iter 62/200] OK iccid=89000123456789012341
+[iter 63/200] OK iccid=89000123456789012341
+[iter 64/200] OK iccid=89000123456789012341
+[iter 65/200] OK iccid=89000123456789012341
+[iter 66/200] OK iccid=89000123456789012341
+[iter 67/200] OK iccid=89000123456789012341
+[iter 68/200] OK iccid=89000123456789012341
+[iter 69/200] OK iccid=89000123456789012341
+[iter 70/200] OK iccid=89000123456789012341
+[iter 71/200] OK iccid=89000123456789012341
+[iter 72/200] OK iccid=89000123456789012341
+[iter 73/200] OK iccid=89000123456789012341
+[iter 74/200] OK iccid=89000123456789012341
+[iter 75/200] OK iccid=89000123456789012341
+[iter 76/200] OK iccid=89000123456789012341
+[iter 77/200] OK iccid=89000123456789012341
+[iter 78/200] OK iccid=89000123456789012341
+[iter 79/200] OK iccid=89000123456789012341
+[iter 80/200] OK iccid=89000123456789012341
+[iter 81/200] OK iccid=89000123456789012341
+[iter 82/200] OK iccid=89000123456789012341
+[iter 83/200] OK iccid=89000123456789012341
+[iter 84/200] OK iccid=89000123456789012341
+[iter 85/200] OK iccid=89000123456789012341
+[iter 86/200] OK iccid=89000123456789012341
+[iter 87/200] OK iccid=89000123456789012341
+[iter 88/200] OK iccid=89000123456789012341
+[iter 89/200] OK iccid=89000123456789012341
+[iter 90/200] OK iccid=89000123456789012341
+[iter 91/200] OK iccid=89000123456789012341
+[iter 92/200] OK iccid=89000123456789012341
+[iter 93/200] OK iccid=89000123456789012341
+[iter 94/200] OK iccid=89000123456789012341
+[iter 95/200] OK iccid=89000123456789012341
+[iter 96/200] OK iccid=89000123456789012341
+[iter 97/200] OK iccid=89000123456789012341
+[iter 98/200] OK iccid=89000123456789012341
+[iter 99/200] OK iccid=89000123456789012341
+[iter 100/200] OK iccid=89000123456789012341
+cooldown 15.0s after 100 iterations...
+[iter 101/200] OK iccid=89000123456789012341
+[iter 102/200] OK iccid=89000123456789012341
+[iter 103/200] OK iccid=89000123456789012341
+[iter 104/200] OK iccid=89000123456789012341
+[iter 105/200] OK iccid=89000123456789012341
+[iter 106/200] OK iccid=89000123456789012341
+[iter 107/200] OK iccid=89000123456789012341
+[iter 108/200] OK iccid=89000123456789012341
+[iter 109/200] OK iccid=89000123456789012341
+[iter 110/200] OK iccid=89000123456789012341
+[iter 111/200] OK iccid=89000123456789012341
+[iter 112/200] OK iccid=89000123456789012341
+[iter 113/200] OK iccid=89000123456789012341
+[iter 114/200] OK iccid=89000123456789012341
+[iter 115/200] OK iccid=89000123456789012341
+[iter 116/200] OK iccid=89000123456789012341
+[iter 117/200] OK iccid=89000123456789012341
+[iter 118/200] OK iccid=89000123456789012341
+[iter 119/200] OK iccid=89000123456789012341
+[iter 120/200] OK iccid=89000123456789012341
+[iter 121/200] OK iccid=89000123456789012341
+[iter 122/200] OK iccid=89000123456789012341
+[iter 123/200] OK iccid=89000123456789012341
+[iter 124/200] OK iccid=89000123456789012341
+[iter 125/200] OK iccid=89000123456789012341
+[iter 126/200] OK iccid=89000123456789012341
+[iter 127/200] OK iccid=89000123456789012341
+[iter 128/200] OK iccid=89000123456789012341
+[iter 129/200] OK iccid=89000123456789012341
+[iter 130/200] OK iccid=89000123456789012341
+[iter 131/200] OK iccid=89000123456789012341
+[iter 132/200] OK iccid=89000123456789012341
+[iter 133/200] OK iccid=89000123456789012341
+[iter 134/200] OK iccid=89000123456789012341
+[iter 135/200] OK iccid=89000123456789012341
+[iter 136/200] OK iccid=89000123456789012341
+[iter 137/200] OK iccid=89000123456789012341
+[iter 138/200] OK iccid=89000123456789012341
+[iter 139/200] OK iccid=89000123456789012341
+[iter 140/200] OK iccid=89000123456789012341
+[iter 141/200] OK iccid=89000123456789012341
+[iter 142/200] OK iccid=89000123456789012341
+[iter 143/200] OK iccid=89000123456789012341
+[iter 144/200] OK iccid=89000123456789012341
+[iter 145/200] OK iccid=89000123456789012341
+[iter 146/200] OK iccid=89000123456789012341
+[iter 147/200] OK iccid=89000123456789012341
+[iter 148/200] OK iccid=89000123456789012341
+[iter 149/200] OK iccid=89000123456789012341
+[iter 150/200] OK iccid=89000123456789012341
+cooldown 15.0s after 150 iterations...
+[iter 151/200] OK iccid=89000123456789012341
+[iter 152/200] OK iccid=89000123456789012341
+[iter 153/200] OK iccid=89000123456789012341
+[iter 154/200] OK iccid=89000123456789012341
+[iter 155/200] OK iccid=89000123456789012341
+[iter 156/200] OK iccid=89000123456789012341
+[iter 157/200] OK iccid=89000123456789012341
+[iter 158/200] OK iccid=89000123456789012341
+[iter 159/200] OK iccid=89000123456789012341
+[iter 160/200] OK iccid=89000123456789012341
+[iter 161/200] OK iccid=89000123456789012341
+[iter 162/200] OK iccid=89000123456789012341
+[iter 163/200] OK iccid=89000123456789012341
+[iter 164/200] OK iccid=89000123456789012341
+[iter 165/200] OK iccid=89000123456789012341
+[iter 166/200] OK iccid=89000123456789012341
+[iter 167/200] OK iccid=89000123456789012341
+[iter 168/200] OK iccid=89000123456789012341
+[iter 169/200] OK iccid=89000123456789012341
+[iter 170/200] OK iccid=89000123456789012341
+[iter 171/200] OK iccid=89000123456789012341
+[iter 172/200] OK iccid=89000123456789012341
+[iter 173/200] OK iccid=89000123456789012341
+[iter 174/200] OK iccid=89000123456789012341
+[iter 175/200] OK iccid=89000123456789012341
+[iter 176/200] OK iccid=89000123456789012341
+[iter 177/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_177.log
+[iter 178/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_178.log
+[iter 179/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_179.log
+[iter 180/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_180.log
+[iter 181/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_181.log
+[iter 182/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_182.log
+[iter 183/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_183.log
+[iter 184/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_184.log
+[iter 185/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_185.log
+[iter 186/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_186.log
+[iter 187/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_187.log
+[iter 188/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_188.log
+[iter 189/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_189.log
+[iter 190/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_190.log
+[iter 191/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_191.log
+[iter 192/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_192.log
+[iter 193/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_193.log
+[iter 194/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_194.log
+[iter 195/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_195.log
+[iter 196/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_196.log
+[iter 197/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_197.log
+[iter 198/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_198.log
+[iter 199/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_199.log
+[iter 200/200] FAIL rc=255 iccid=None log=/home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw/session_200.log
+iter 1 OK iccid=89000123456789012341
+iter 2 OK iccid=89000123456789012341
+iter 3 OK iccid=89000123456789012341
+iter 4 OK iccid=89000123456789012341
+iter 5 OK iccid=89000123456789012341
+iter 6 OK iccid=89000123456789012341
+iter 7 OK iccid=89000123456789012341
+iter 8 OK iccid=89000123456789012341
+iter 9 OK iccid=89000123456789012341
+iter 10 OK iccid=89000123456789012341
+iter 11 OK iccid=89000123456789012341
+iter 12 OK iccid=89000123456789012341
+iter 13 OK iccid=89000123456789012341
+iter 14 OK iccid=89000123456789012341
+iter 15 OK iccid=89000123456789012341
+iter 16 OK iccid=89000123456789012341
+iter 17 OK iccid=89000123456789012341
+iter 18 OK iccid=89000123456789012341
+iter 19 OK iccid=89000123456789012341
+iter 20 OK iccid=89000123456789012341
+iter 21 OK iccid=89000123456789012341
+iter 22 OK iccid=89000123456789012341
+iter 23 OK iccid=89000123456789012341
+iter 24 OK iccid=89000123456789012341
+iter 25 OK iccid=89000123456789012341
+iter 26 OK iccid=89000123456789012341
+iter 27 OK iccid=89000123456789012341
+iter 28 OK iccid=89000123456789012341
+iter 29 OK iccid=89000123456789012341
+iter 30 OK iccid=89000123456789012341
+iter 31 OK iccid=89000123456789012341
+iter 32 OK iccid=89000123456789012341
+iter 33 OK iccid=89000123456789012341
+iter 34 OK iccid=89000123456789012341
+iter 35 OK iccid=89000123456789012341
+iter 36 OK iccid=89000123456789012341
+iter 37 OK iccid=89000123456789012341
+iter 38 OK iccid=89000123456789012341
+iter 39 OK iccid=89000123456789012341
+iter 40 OK iccid=89000123456789012341
+iter 41 OK iccid=89000123456789012341
+iter 42 OK iccid=89000123456789012341
+iter 43 OK iccid=89000123456789012341
+iter 44 OK iccid=89000123456789012341
+iter 45 OK iccid=89000123456789012341
+iter 46 OK iccid=89000123456789012341
+iter 47 OK iccid=89000123456789012341
+iter 48 OK iccid=89000123456789012341
+iter 49 OK iccid=89000123456789012341
+iter 50 OK iccid=89000123456789012341
+cooldown 15.0s
+iter 51 OK iccid=89000123456789012341
+iter 52 OK iccid=89000123456789012341
+iter 53 OK iccid=89000123456789012341
+iter 54 OK iccid=89000123456789012341
+iter 55 OK iccid=89000123456789012341
+iter 56 OK iccid=89000123456789012341
+iter 57 OK iccid=89000123456789012341
+iter 58 OK iccid=89000123456789012341
+iter 59 OK iccid=89000123456789012341
+iter 60 OK iccid=89000123456789012341
+iter 61 OK iccid=89000123456789012341
+iter 62 OK iccid=89000123456789012341
+iter 63 OK iccid=89000123456789012341
+iter 64 OK iccid=89000123456789012341
+iter 65 OK iccid=89000123456789012341
+iter 66 OK iccid=89000123456789012341
+iter 67 OK iccid=89000123456789012341
+iter 68 OK iccid=89000123456789012341
+iter 69 OK iccid=89000123456789012341
+iter 70 OK iccid=89000123456789012341
+iter 71 OK iccid=89000123456789012341
+iter 72 OK iccid=89000123456789012341
+iter 73 OK iccid=89000123456789012341
+iter 74 OK iccid=89000123456789012341
+iter 75 OK iccid=89000123456789012341
+iter 76 OK iccid=89000123456789012341
+iter 77 OK iccid=89000123456789012341
+iter 78 OK iccid=89000123456789012341
+iter 79 OK iccid=89000123456789012341
+iter 80 OK iccid=89000123456789012341
+iter 81 OK iccid=89000123456789012341
+iter 82 OK iccid=89000123456789012341
+iter 83 OK iccid=89000123456789012341
+iter 84 OK iccid=89000123456789012341
+iter 85 OK iccid=89000123456789012341
+iter 86 OK iccid=89000123456789012341
+iter 87 OK iccid=89000123456789012341
+iter 88 OK iccid=89000123456789012341
+iter 89 OK iccid=89000123456789012341
+iter 90 OK iccid=89000123456789012341
+iter 91 OK iccid=89000123456789012341
+iter 92 OK iccid=89000123456789012341
+iter 93 OK iccid=89000123456789012341
+iter 94 OK iccid=89000123456789012341
+iter 95 OK iccid=89000123456789012341
+iter 96 OK iccid=89000123456789012341
+iter 97 OK iccid=89000123456789012341
+iter 98 OK iccid=89000123456789012341
+iter 99 OK iccid=89000123456789012341
+iter 100 OK iccid=89000123456789012341
+cooldown 15.0s
+iter 101 OK iccid=89000123456789012341
+iter 102 OK iccid=89000123456789012341
+iter 103 OK iccid=89000123456789012341
+iter 104 OK iccid=89000123456789012341
+iter 105 OK iccid=89000123456789012341
+iter 106 OK iccid=89000123456789012341
+iter 107 OK iccid=89000123456789012341
+iter 108 OK iccid=89000123456789012341
+iter 109 OK iccid=89000123456789012341
+iter 110 OK iccid=89000123456789012341
+iter 111 OK iccid=89000123456789012341
+iter 112 OK iccid=89000123456789012341
+iter 113 OK iccid=89000123456789012341
+iter 114 OK iccid=89000123456789012341
+iter 115 OK iccid=89000123456789012341
+iter 116 OK iccid=89000123456789012341
+iter 117 OK iccid=89000123456789012341
+iter 118 OK iccid=89000123456789012341
+iter 119 OK iccid=89000123456789012341
+iter 120 OK iccid=89000123456789012341
+iter 121 OK iccid=89000123456789012341
+iter 122 OK iccid=89000123456789012341
+iter 123 OK iccid=89000123456789012341
+iter 124 OK iccid=89000123456789012341
+iter 125 OK iccid=89000123456789012341
+iter 126 OK iccid=89000123456789012341
+iter 127 OK iccid=89000123456789012341
+iter 128 OK iccid=89000123456789012341
+iter 129 OK iccid=89000123456789012341
+iter 130 OK iccid=89000123456789012341
+iter 131 OK iccid=89000123456789012341
+iter 132 OK iccid=89000123456789012341
+iter 133 OK iccid=89000123456789012341
+iter 134 OK iccid=89000123456789012341
+iter 135 OK iccid=89000123456789012341
+iter 136 OK iccid=89000123456789012341
+iter 137 OK iccid=89000123456789012341
+iter 138 OK iccid=89000123456789012341
+iter 139 OK iccid=89000123456789012341
+iter 140 OK iccid=89000123456789012341
+iter 141 OK iccid=89000123456789012341
+iter 142 OK iccid=89000123456789012341
+iter 143 OK iccid=89000123456789012341
+iter 144 OK iccid=89000123456789012341
+iter 145 OK iccid=89000123456789012341
+iter 146 OK iccid=89000123456789012341
+iter 147 OK iccid=89000123456789012341
+iter 148 OK iccid=89000123456789012341
+iter 149 OK iccid=89000123456789012341
+iter 150 OK iccid=89000123456789012341
+cooldown 15.0s
+iter 151 OK iccid=89000123456789012341
+iter 152 OK iccid=89000123456789012341
+iter 153 OK iccid=89000123456789012341
+iter 154 OK iccid=89000123456789012341
+iter 155 OK iccid=89000123456789012341
+iter 156 OK iccid=89000123456789012341
+iter 157 OK iccid=89000123456789012341
+iter 158 OK iccid=89000123456789012341
+iter 159 OK iccid=89000123456789012341
+iter 160 OK iccid=89000123456789012341
+iter 161 OK iccid=89000123456789012341
+iter 162 OK iccid=89000123456789012341
+iter 163 OK iccid=89000123456789012341
+iter 164 OK iccid=89000123456789012341
+iter 165 OK iccid=89000123456789012341
+iter 166 OK iccid=89000123456789012341
+iter 167 OK iccid=89000123456789012341
+iter 168 OK iccid=89000123456789012341
+iter 169 OK iccid=89000123456789012341
+iter 170 OK iccid=89000123456789012341
+iter 171 OK iccid=89000123456789012341
+iter 172 OK iccid=89000123456789012341
+iter 173 OK iccid=89000123456789012341
+iter 174 OK iccid=89000123456789012341
+iter 175 OK iccid=89000123456789012341
+iter 176 OK iccid=89000123456789012341
+iter 177 FAIL rc=255 iccid=None
+iter 178 FAIL rc=255 iccid=None
+iter 179 FAIL rc=255 iccid=None
+iter 180 FAIL rc=255 iccid=None
+iter 181 FAIL rc=255 iccid=None
+iter 182 FAIL rc=255 iccid=None
+iter 183 FAIL rc=255 iccid=None
+iter 184 FAIL rc=255 iccid=None
+iter 185 FAIL rc=255 iccid=None
+iter 186 FAIL rc=255 iccid=None
+iter 187 FAIL rc=255 iccid=None
+iter 188 FAIL rc=255 iccid=None
+iter 189 FAIL rc=255 iccid=None
+iter 190 FAIL rc=255 iccid=None
+iter 191 FAIL rc=255 iccid=None
+iter 192 FAIL rc=255 iccid=None
+iter 193 FAIL rc=255 iccid=None
+iter 194 FAIL rc=255 iccid=None
+iter 195 FAIL rc=255 iccid=None
+iter 196 FAIL rc=255 iccid=None
+iter 197 FAIL rc=255 iccid=None
+iter 198 FAIL rc=255 iccid=None
+iter 199 FAIL rc=255 iccid=None
+iter 200 FAIL rc=255 iccid=None
+done failed_iters=[177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200]
+Wrote logs under /home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw; failures: 24 [177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196]...

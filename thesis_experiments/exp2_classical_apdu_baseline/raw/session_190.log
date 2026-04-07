@@ -1,0 +1,14 @@
+iteration 190 2026-04-07T06:37:23.320561+00:00
+$ /home/jhubuntu/pq-rsp-benchmarks/lpac/build/src/lpac profile download -s testsmdpplus1.example.com:8443 -m TS48v1_A
+--- stdout ---
+{"type":"progress","payload":{"code":0,"message":"es10b_get_euicc_challenge_and_info","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_initiate_authentication","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es10b_cancel_session","data":"testsmdpplus1.example.com:8443"}}
+{"type":"progress","payload":{"code":0,"message":"es9p_cancel_session","data":"testsmdpplus1.example.com:8443"}}
+{"type":"lpa","payload":{"code":-1,"message":"es9p_initiate_authentication","data":"HTTP transport failed"}}
+--- stderr ---
+BENCH|BF2E|GetEuiccChallenge|5765|0
+BENCH|BF20|GetEuiccInfo1|41246|0
+curl_easy_perform() failed: Couldn't connect to server
+BENCH|ES9P|/gsma/rsp2/es9plus/initiateAuthentication|946|-1
+--- exit 255 ---

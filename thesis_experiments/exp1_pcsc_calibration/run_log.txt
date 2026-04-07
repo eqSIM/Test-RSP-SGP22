@@ -1,0 +1,16 @@
+Experiment 1 calibration run (clean summary — use `tee run_log.txt` without append on reruns)
+
+Command:
+  cd thesis_experiments/exp1_pcsc_calibration
+  /path/to/benchmark/.venv/bin/python scripts/calibrate.py 2>&1 | tee run_log.txt
+
+Observed:
+- Active protocol after connect: T=0 only (eUICC negotiated T=0).
+- Payload sizes 0, 32, 64, 128, 255: 500 RTT samples each (STORE DATA, short APDU).
+- Extended sizes 512, 1024, 1536, 2048, 2515: first transmit failed with PC/SC error
+  0x80100016 (transaction failed; typical for extended-length body on T=0 / reader buffer limits).
+  Marker files: raw/rejected_at_{512,1024,1536,2048,2515}.txt
+
+Result: Original-range (0–255 B) linear model fitted with high R²; full 0–2515 B validation
+requires T=1 (or a reader/card path that accepts extended APDUs). Re-run on hardware that
+negotiates T=1 to populate extended CSVs.

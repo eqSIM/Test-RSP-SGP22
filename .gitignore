@@ -1,9 +1,49 @@
+# Python
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+
+# Local / project virtualenvs
 pysim/.venv/
 .venv-bench/
+.venv/
+
+# lpac / nginx build trees
 lpac/build/
 nginx/nginx-source/
 nginx/pq_build/
+
+# Benchmark data dumps (large / machine-local)
 pqc_benchmark_data/
-*.pyc
-__pycache__/
-*.tex
+
+# Nginx working directory (runtime state, not config)
+nginx/runtime/logs/
+nginx/runtime/nginx.pid
+nginx/runtime/client_body_temp/
+nginx/runtime/fastcgi_temp/
+nginx/runtime/proxy_temp/
+nginx/runtime/scgi_temp/
+nginx/runtime/uwsgi_temp/
+nginx/runtime/*.log
+nginx/runtime/*.jsonl
+
+# LaTeX build debris (keep *.tex sources tracked)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.synctex.gz
+*.toc
+*.xdv
+
+# Editor / OS
+.DS_Store
+*.swp
+*~

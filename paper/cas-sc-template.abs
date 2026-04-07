@@ -1,0 +1,35 @@
+The GSMA SGP.22 Consumer Remote SIM Provisioning standard uses ECDSA,
+ECDH, and X.509 certificate chains, all broken by Shor's algorithm on a
+cryptographically relevant quantum computer. Harvest-now-decrypt-later
+(HNDL) lets recorded ES9+ traffic be decrypted later, exposing long-lived
+IMSI values and credentials. Whether NIST ML-KEM (FIPS 203) and ML-DSA
+(FIPS 204) fit eUICC hardware below 500 KB RAM and metered ES9+ links has
+not been evaluated at full Consumer RSP scope. To our knowledge, we
+present the first evaluation that jointly addresses formal verification
+under classical and quantum adversaries, hardware-gap benchmarking on a
+production eUICC and an STM32 Nucleo-F446RE (Cortex-M4), and four
+migration configurations (a--d) for Consumer RSP, using ProVerif 2.05 under
+the symbolic Dolev-Yao model with a Shor oracle in the quantum setting.
+Under the quantum adversary with the Shor oracle scoped to ECDH inversion
+(modelling HNDL on session keys), configurations (a) and (b) fail Q3, Q4, and
+Q6; configurations (c) and (d) pass all six SGP.22 security properties in
+that model. A complete Shor capability including ECDSA forgery would break
+Q1 and Q2 for (a)--(c), leaving only configuration~(d) with all six properties. Configuration (c) replaces ECDH with ML-KEM-768,
+retains ECDSA, and closes the HNDL threat on session keys without CI
+re-issuance; configuration (d) adds ML-DSA-44, but its 16,256-byte chain
+exceeds current eUICC volatile memory for full buffering, requiring
+streaming certificate verification and new silicon. Mean end-to-end
+session wall time is 25.20~s; TLS handshake bytes grow by a factor of
+$2.4$. ML-KEM-768 key agreement overhead at step~21a was directly measured
+at 0.55~ms on a software eUICC protocol flow (upper bound, x86\_64), with
+full session overhead of 764~ms relative to the classical baseline; the
+normalised eUICC projection ranges from [Y]~ms to [Z]~ms. Results show that
+PQ-TLS transport imposes zero measurable latency overhead on RSP sessions
+($p > 0.9$), while configuration (b) does not close the HNDL window, as empirically
+confirmed by observing both ECDH ephemeral public keys
+in plaintext on the eUICC-to-LPA APDU channel during a PQ-TLS protected
+session. We recommend phased migration:
+deploy (b) for transport hardening, prioritise (c) on the next eUICC
+generation to close HNDL, and target (d) once SGP.22 specifies streaming
+verification and silicon supports it, aligned with NSA CNSA 2.0 and GSMA
+PQ.04.

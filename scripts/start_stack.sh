@@ -7,6 +7,8 @@ NGX="$ROOT/nginx"
 RUN="$NGX/runtime"
 export PYTHONPATH="$PYSIM"
 export SMDPP_BENCH_LOG="${SMDPP_BENCH_LOG:-$RUN/smdpp_bench.jsonl}"
+# Force pq-rsp-benchmarks bundled SGP.26 test certs (CI SKI matches sysmocom C2T firmware).
+export SMDPP_DATA_DIR="${SMDPP_DATA_DIR:-$PYSIM/smdpp-data}"
 mkdir -p "$RUN/logs"
 
 # Prefer nginx built against OpenSSL 3.6+ (PQ) if present
@@ -18,8 +20,12 @@ if [[ -z "$NGINX_BIN" ]]; then
   NGINX_BIN="$(command -v nginx)"
 fi
 
-if ! ss -tlnp 2>/dev/null | grep -q ':8000'; then
-  echo "Starting osmo-smdpp on :8000 (--nossl)..."
+if ss -tlnp 2>/dev/null | grep -q ':8000'; then
+  echo "WARNING: port 8000 is already in use — not starting osmo-smdpp from this script."
+  echo "If profile download fails with CI/DPauth errors, that listener may be another tree"
+  echo "(wrong smdpp-data). Stop it, then re-run:  SMDPP_DATA_DIR=$SMDPP_DATA_DIR  $0"
+else
+  echo "Starting osmo-smdpp on :8000 (--nossl), DATA_DIR=$SMDPP_DATA_DIR ..."
   (
     cd "$PYSIM" && . .venv/bin/activate && exec python3 "$PYSIM/osmo-smdpp.py" -p 8000 --nossl -m -v
   ) >>"$RUN/smdpp.log" 2>&1 &

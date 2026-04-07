@@ -1,0 +1,50 @@
+diff --git a/pysim/osmo-smdpp.py b/pysim/osmo-smdpp.py
+index 876a5ae..a035ad1 100755
+--- a/pysim/osmo-smdpp.py
++++ b/pysim/osmo-smdpp.py
+@@ -782,22 +782,32 @@ class SmDppHttpServer:
+         ss.euicc_otpk = euiccSigned2['euiccOtpk']
+         logger.debug("euiccOtpk: %s" % (b2h(ss.euicc_otpk)))
+ 
+-        # Generate a one-time ECKA key pair (ot{PK,SK}.DP.ECKA) using the curve indicated by the Key Parameter
+-        # Reference value of CERT.DPpb.ECDDSA
+-        logger.debug("curve = %s" % self.dp_pb.get_curve())
+-        ss.smdp_ot = ec.generate_private_key(self.dp_pb.get_curve())
+-        # extract the public key in (hopefully) the right format for the ES8+ interface
+-        ss.smdp_otpk = ss.smdp_ot.public_key().public_bytes(Encoding.X962, PublicFormat.UncompressedPoint)
+-        logger.debug("smdpOtpk: %s" % b2h(ss.smdp_otpk))
+-        logger.debug("smdpOtsk: %s" % b2h(ss.smdp_ot.private_bytes(Encoding.DER, PrivateFormat.PKCS8, NoEncryption())))
++        # Experiment 5: ML-KEM-768 when eUICC sends 1184-byte public key (vs 65-byte ECDH)
++        _MLKEM_PK = 1184
++        if len(ss.euicc_otpk) == _MLKEM_PK:
++            import oqs
++            kem = oqs.KeyEncapsulation('ML-KEM-768')
++            ciphertext, ss.shared_secret = kem.encap_secret(ss.euicc_otpk)
++            ss.smdp_otpk = ciphertext
++            ss.smdp_ot = None
++            logger.debug("ML-KEM encaps: smdpOtpk (ct) len=%d shared_secret=%s" % (len(ss.smdp_otpk), b2h(ss.shared_secret)))
++        else:
++            # Generate a one-time ECKA key pair (ot{PK,SK}.DP.ECKA) using the curve indicated by the Key Parameter
++            # Reference value of CERT.DPpb.ECDDSA
++            logger.debug("curve = %s" % self.dp_pb.get_curve())
++            ss.smdp_ot = ec.generate_private_key(self.dp_pb.get_curve())
++            # extract the public key in (hopefully) the right format for the ES8+ interface
++            ss.smdp_otpk = ss.smdp_ot.public_key().public_bytes(Encoding.X962, PublicFormat.UncompressedPoint)
++            logger.debug("smdpOtpk: %s" % b2h(ss.smdp_otpk))
++            logger.debug("smdpOtsk: %s" % b2h(ss.smdp_ot.private_bytes(Encoding.DER, PrivateFormat.PKCS8, NoEncryption())))
++
++            # Generate Session Keys using the CRT, otPK.eUICC.ECKA and otSK.DP.ECKA according to annex G
++            euicc_public_key = ec.EllipticCurvePublicKey.from_encoded_point(ss.smdp_ot.curve, ss.euicc_otpk)
++            ss.shared_secret = ss.smdp_ot.exchange(ec.ECDH(), euicc_public_key)
++            logger.debug("shared_secret: %s" % b2h(ss.shared_secret))
+ 
+         ss.host_id = b'mahlzeit'
+ 
+-        # Generate Session Keys using the CRT, otPK.eUICC.ECKA and otSK.DP.ECKA according to annex G
+-        euicc_public_key = ec.EllipticCurvePublicKey.from_encoded_point(ss.smdp_ot.curve, ss.euicc_otpk)
+-        ss.shared_secret = ss.smdp_ot.exchange(ec.ECDH(), euicc_public_key)
+-        logger.debug("shared_secret: %s" % b2h(ss.shared_secret))
+-
+         # TODO: Check if this order requires a Confirmation Code verification
+ 
+         #  Perform actual protection + binding of profile package (or return  pre-bound one)

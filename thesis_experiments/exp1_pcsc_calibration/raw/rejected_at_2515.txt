@@ -1,0 +1,2 @@
+extended STORE DATA failed on first attempt
+Failed to transmit with protocol T0. Transaction failed.: Transaction failed. (0x80100016)
