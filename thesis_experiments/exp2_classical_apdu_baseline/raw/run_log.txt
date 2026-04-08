@@ -629,3 +629,7 @@ iter 199 FAIL rc=255 iccid=None
 iter 200 FAIL rc=255 iccid=None
 done failed_iters=[177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200]
 Wrote logs under /home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/raw; failures: 24 [177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196]...
+
+=== exp2 run_sessions start 2026-04-08T02:10:56.672233+00:00 start=177 last=177 count=1 ===
+iter 177 FAIL rc=255 iccid=None
+done failed_iters=[177]

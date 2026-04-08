@@ -1,11 +1,11 @@
 PC/SC model: T_PCSC(n) = 1073.7516 + 62.295119 * n (µs)
-Payload sizes file: scripts/payload_sizes_ref.json
+Payload sizes file: /home/jhubuntu/pq-rsp-benchmarks/thesis_experiments/exp2_classical_apdu_baseline/scripts/payload_sizes_ref.json
 All rows had Lc and T_PCSC subtracted: False
 
-T_eUICC BF38 AuthenticateServer median net: 3117160.500 µs
+T_eUICC BF38 AuthenticateServer median net: 2959414.524 µs
 (Thesis: proxy for on-card verify work / ECDSA anchor — interpret cautiously.)
 
-T_eUICC BF21 PrepareDownload median net: 3749753.000 µs
+T_eUICC BF21 PrepareDownload median net: 3707377.585 µs
 T_eUICC(ECDH_keygen): not computed — pass --smdp2-verify-us with your smdpSigned2 verify estimate (µs).
 
 Session logs with usable BENCH (successful profile download): 176 / 200

@@ -3,6 +3,6 @@ Interpretation: median(config_c) − median(config_a) isolates the incremental c
 of replacing ECDH P-256 key generation with ML-KEM-768 keygen in the BF21 path,
 plus any fixed TLV/encoding differences between the two stacks.
 
-median_BF21_us_config_a (ECDH path): 493722.5
-median_BF21_us_config_c (ML-KEM path): 493557.0
-T_delta_median_us: -165.5
+median_BF21_us_config_a (ECDH path): 495191.5
+median_BF21_us_config_c (ML-KEM path): 495002.5
+T_delta_median_us: -189.0

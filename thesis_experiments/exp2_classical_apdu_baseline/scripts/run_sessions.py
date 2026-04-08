@@ -127,6 +127,13 @@ def cleanup_installed_profile(
 def main() -> int:
     ap = argparse.ArgumentParser(description="Exp2: PC/SC profile download sessions with BENCH logging.")
     ap.add_argument("--iterations", type=int, default=int(os.environ.get("MEASURE_ITERS", "200")))
+    ap.add_argument(
+        "--start",
+        type=int,
+        default=1,
+        metavar="N",
+        help="First iteration number for session_NNN.log (default 1). With --iterations K, runs N..N+K-1.",
+    )
     ap.add_argument("--lpac-bin", type=Path, default=Path(os.environ.get("LPAC_BIN", str(DEFAULT_LPAC))))
     ap.add_argument("--smdp", default=os.environ.get("SMDP_ADDR", DEFAULT_SMDP))
     ap.add_argument("--matching-id", "-m", default=DEFAULT_MATCHING_ID)
@@ -146,13 +153,19 @@ def main() -> int:
     env = lpac_env(args.openssl_ld or None, args.lpac_bin)
     run_log = raw_dir / "run_log.txt"
 
+    start_iter = max(1, int(args.start))
+    last_iter = start_iter + args.iterations - 1
+
     with run_log.open("a", encoding="utf-8") as run_ledger:
         start_ts = datetime.now(timezone.utc).isoformat()
-        run_ledger.write(f"\n=== exp2 run_sessions start {start_ts} iterations={args.iterations} ===\n")
+        run_ledger.write(
+            f"\n=== exp2 run_sessions start {start_ts} start={start_iter} last={last_iter} "
+            f"count={args.iterations} ===\n"
+        )
         run_ledger.flush()
 
         failed: list[int] = []
-        for i in range(1, args.iterations + 1):
+        for i in range(start_iter, last_iter + 1):
             sess_path = raw_dir / f"session_{i:03d}.log"
             dl_cmd = ["profile", "download", "-s", args.smdp, "-m", args.matching_id]
             iter_ts = datetime.now(timezone.utc).isoformat()
@@ -183,12 +196,12 @@ def main() -> int:
             if rc != 0 or not iccid:
                 failed.append(i)
                 print(
-                    f"[iter {i}/{args.iterations}] FAIL rc={rc} iccid={iccid!r} log={sess_path}",
+                    f"[iter {i}/{last_iter}] FAIL rc={rc} iccid={iccid!r} log={sess_path}",
                     flush=True,
                 )
                 run_ledger.write(f"iter {i} FAIL rc={rc} iccid={iccid!r}\n")
             else:
-                print(f"[iter {i}/{args.iterations}] OK iccid={iccid}", flush=True)
+                print(f"[iter {i}/{last_iter}] OK iccid={iccid}", flush=True)
                 run_ledger.write(f"iter {i} OK iccid={iccid}\n")
                 if not args.skip_cleanup:
                     with sess_path.open("a", encoding="utf-8") as sf:
@@ -196,7 +209,7 @@ def main() -> int:
                             args.lpac_bin, env, iccid, args.timeout, sf, str(i)
                         )
 
-            if args.cooldown_every > 0 and i % args.cooldown_every == 0 and i < args.iterations:
+            if args.cooldown_every > 0 and i % args.cooldown_every == 0 and i < last_iter:
                 print(f"cooldown {args.cooldown_sec}s after {i} iterations...", flush=True)
                 run_ledger.write(f"cooldown {args.cooldown_sec}s\n")
                 time.sleep(args.cooldown_sec)

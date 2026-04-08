@@ -5,13 +5,13 @@
 - Version **0.15.0** (from `OQS_VERSION_*` in the liboqs source tree used for the build).
 - Install prefix used: `$HOME/.local` (`CMAKE_PREFIX_PATH` for CMake, `PATH`/`PKG_CONFIG_PATH` as needed).
 
-## Key numbers (200 iterations)
+## Key numbers (200 iterations each, 2026-04-08 rerun)
 
-- `median BF21_us` config **(a) ECDH:** 494403.5 μs  
-- `median BF21_us` config **(c) ML-KEM:** 494956.5 μs  
-- **Median difference (c−a):** 553.0 μs — interpret as incremental BF21 cost when swapping ECDH keygen for ML-KEM-768 keygen (plus any fixed encoding differences), not a bare microbenchmark of `OQS_KEM_keypair` alone.
+- `median BF21_us` config **(a) ECDH:** 495191.5 μs  
+- `median BF21_us` config **(c) ML-KEM:** 495002.5 μs  
+- **Median difference (c−a):** −189.0 μs — within measurement noise (σ ≈ 2400–3900 μs); the BF21 cost is statistically indistinguishable between the two configurations on x86_64, consistent with sub-ms keygen for both algorithms on modern hardware.
 
-- Full `profile download` wall time medians: **(a)** ~11254 ms, **(c)** ~12018 ms — decaps/encaps and larger payloads dominate vs the sub-ms BF21 gap.
+- Full `profile download` wall time medians: **(a)** ~11264 ms, **(c)** ~12005 ms — delta ~741 ms at session level, driven by ML-KEM encaps/decaps and the larger ES9+ bound_body payload.
 
 ## Instrumentation
 
@@ -25,21 +25,31 @@
 
 ## Interpretation
 
-### BF21 difference (553 µs)
+### BF21 difference (−189 µs, within noise)
 - Not a pure ML-KEM keygen microbenchmark
-- Captures: ML-KEM keygen + 1119 extra encoding bytes
-- Estimated encoding component: ~70 µs (at 62.3 µs/byte from Exp 1)
-- Estimated pure keygen component: ~480 µs on x86_64 liboqs 0.15.0
-- As fraction of BF21 total: 553/494404 = 0.11% — negligible at APDU level
+- BF21 RTT dominated by socket/APDU framing overhead (~495 ms); actual keygen is sub-ms on x86_64
+- Measured delta (−189 µs) is within 1σ of both distributions (σ_a ≈ 2387 µs, σ_c ≈ 3937 µs)
+- Conclusion: BF21 incremental cost of ML-KEM-768 vs ECDH P-256 is **statistically negligible** on x86_64 software eUICC
+- As fraction of BF21 total: |−189| / 495192 = 0.04% — negligible at APDU level
 
-### Full session difference (764 ms)
-- BF21 contribution: 553 µs (0.07% of full session delta)
-- Remaining ~211 ms: ML-KEM encaps at step 24b + larger bind_body payload
-- Full session overhead of 764 ms on top of 11,254 ms = 6.8% increase
+### Full session difference (~741 ms)
+- BF21 contribution: negligible (within noise)
+- Full session overhead of 741 ms on top of 11,264 ms = 6.6% increase
+- Driven by ML-KEM encaps/decaps + larger BPP payload from expanded key material
 - On constrained silicon absolute times will differ but proportions should hold
 
 ### Paper claim
-Config (c) protocol feasibility confirmed end-to-end.
-BF21 incremental cost: 553 µs (upper bound, x86_64 software eUICC).
-Full session overhead: ~764 ms (upper bound, x86_64 software eUICC).
+Config (c) protocol feasibility confirmed end-to-end (200/200 successful downloads).
+BF21 incremental cost: statistically negligible on x86_64 software eUICC (within σ).
+Full session overhead: ~741 ms (6.6%) — upper bound for x86_64 software eUICC.
 STM32 Experiments 7-13 needed for eUICC-realistic projection.
+
+## v-euicc crash fix (2026-04-08)
+
+During the 2026-04-07 rerun, v-euicc-daemon crashed at iteration 36 of config (c).
+Root cause: `apdu_handle_connect()` called `euicc_state_init()` (which does `memset(state, 0)`)
+without first freeing existing heap allocations from the prior session. In ML-KEM mode
+the per-session heap allocations are large (euicc_otpk 1184B + euicc_otsk 2400B +
+smdp_otpk 1088B = 4672B per session vs 162B for ECDH), causing heap corruption after
+~35 sessions. Fix: add `euicc_state_reset(state)` before `euicc_state_init(state)` in
+`apdu_handle_connect()` in `v-euicc/src/apdu_handler.c`.
